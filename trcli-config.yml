@@ -1,5 +1,5 @@
-host: https://INSTANCE-NAME.testrail.io
-project: PROJECT NAME
-username: USERNAME
-password: PASSWORD
-title: JUnit5 Automated Test Run
+host: https://testrail101.testrail.io
+project: TestRail CLI code-first
+username: gaurav.tyagi@gurock.io
+password: G00dn1ght29
+title: JUnit Integration CircleCI
