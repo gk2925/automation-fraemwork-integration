@@ -70,10 +70,10 @@ jobs:
               -h https://testrail101.testrail.io/ \
               --project "TestRail CLI code-first" \
               -u $USER \
-              -p $PASS \ 
+              -p $PASS \
               parse_junit \
-              --title "Automated Tests from CircleCI flow" \
-              -f "./target/TEST-junit-jupiter.xml"
+              --title "Automated Tests from GitHub workflow" \
+              -f "junit-report.xml"
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
