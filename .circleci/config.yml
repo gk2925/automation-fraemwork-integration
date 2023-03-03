@@ -31,6 +31,9 @@ jobs:
 
       - run:
             name: Check Chrome version
+            environment: 
+              USER: USER
+              PASS: PASS
             command: |
               google-chrome --version
               python --version
@@ -38,8 +41,8 @@ jobs:
               java --version
               google-chrome --version
               mvn --version
-              echo $uname
-              echo $pass
+              echo $USER
+              echo $PASS
       - run:
             name: Check Current directory
             command: pwd
@@ -62,7 +65,11 @@ jobs:
           command: mvn clean compile test
 
       - run:
+       
           name: parse the tests to testrail
+          environment: 
+              USER: USER
+              PASS: PASS
           command: trcli -y -c "trcli-config.yml" parse_junit -f "./target/TEST-junit-jupiter.xml"
 
 
