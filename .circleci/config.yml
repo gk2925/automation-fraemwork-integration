@@ -63,19 +63,17 @@ jobs:
       - run:
           name: Test
           command: mvn clean compile test
-
       - run:
-          name: parse the tests to testrait 
+          name: parse the tests to testrail 
           command: | 
              trcli -y \
-             -h https://testrail101.testrail.io/ \
-             --project "TestRail CLI code-first" \
-             -u $USER \
-             -p $PASS \ 
+              -h https://testrail101.testrail.io/ \
+              --project "TestRail CLI code-first" \
+              -u $USER \
+              -p $PASS \ 
               parse_junit \
-             --title "Automated Tests from CircleCI flow" \
-             -f "./target/TEST-junit-jupiter.xml"
-
+              --title "Automated Tests from CircleCI flow" \
+              -f "./target/TEST-junit-jupiter.xml"
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
