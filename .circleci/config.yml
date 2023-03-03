@@ -57,7 +57,7 @@ jobs:
       # Then run your tests!
       - run:
           name: Test
-          command: mvn mvn clean compile test
+          command: mvn clean compile test
 
       - run:
           name: parse the tests to testrail
