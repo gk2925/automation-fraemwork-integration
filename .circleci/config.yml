@@ -41,8 +41,8 @@ jobs:
               java --version
               google-chrome --version
               mvn --version
-              echo ${USER}
-              echo ${PASS}
+              echo "${USER}"
+              echo "${PASS}"
       - run:
             name: Check Current directory
             command: pwd
