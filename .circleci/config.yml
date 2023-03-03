@@ -30,10 +30,7 @@ jobs:
               sudo apt install maven
 
       - run:
-            name: Check Chrome version
-            environment: 
-              USER: USER
-              PASS: PASS
+            name: Check Chrome version 
             command: |
               google-chrome --version
               python --version
@@ -48,9 +45,12 @@ jobs:
             command: pwd
             
       - run:
-          name: Check current director
+          name: Check current directory
           command: ls
           
+      - run:
+          name: make linux driver executable
+          command: chmod 777 drivers/linux/chromedriver 
       - run:
           name: install trcli
           command: pip install trcli
@@ -65,12 +65,16 @@ jobs:
           command: mvn clean compile test
 
       - run:
-       
-          name: parse the tests to testrail
-          environment: 
-              USER: USER
-              PASS: PASS
-          command: trcli -y -c "trcli-config.yml" parse_junit -f "./target/TEST-junit-jupiter.xml"
+          name: parse the tests to testrait 
+          command: | 
+            trcli -y \
+             -h https://testrail101.testrail.io/ \
+             --project "TestRail CLI code-first" \
+            -u $USER \
+            -p $PASS \ 
+              parse_junit \
+            --title "Automated Tests from CircleCI flow" \
+            -f "./target/TEST-junit-jupiter.xml"
 
 
 # Invoke jobs via workflows
