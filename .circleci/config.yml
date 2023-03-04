@@ -6,7 +6,6 @@ orbs:
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
- 
   # Below is the definition of your job to build and test your app, you can rename and customize it as you want.
   build-and-test:
     # These next lines define a Docker executor: https://circleci.com/docs/2.0/executor-types/
@@ -19,61 +18,43 @@ jobs:
     # Add steps to the job
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:
-      - browser-tools/install-browser-tools:
-            chrome-version: 109.0.5414.74
       # Checkout the code as the first step.
       - checkout
+      # install maven
       - run:
-            name: install maven 
-            command: |
-              sudo apt update
-              sudo apt install maven
-
-      - run:
-            name: Check Chrome version 
-            command: |
-              google-chrome --version
-              python --version
-              node --version
-              java --version
-              google-chrome --version
-              mvn --version
-              echo "${USER}"
-              echo "${PASS}"
-      - run:
-            name: Check Current directory
-            command: pwd
-            
-      - run:
-          name: Check current directory
-          command: ls
-          
+          name: install maven
+          command: |
+            sudo apt update
+            sudo apt install maven
+      # Make the selenium driver executable before running the selenium tests
       - run:
           name: make linux driver executable
-          command: chmod 777 drivers/linux/chromedriver 
+          command: chmod 777 drivers/linux/chromedriver
+      # Install TR CLI
       - run:
           name: install trcli
           command: pip install trcli
-
-
+      # Install test project
       - run:
-          name: Build
+          name: Install the test project
           command: mvn clean compile
-      # Then run your tests!
+      # Run the tests
       - run:
-          name: Test
+          name: Run the tests
           command: mvn clean compile test
+      # Upload test results to Testrail
       - run:
-          name: parse the tests to testrail 
-          command: | 
-             trcli -y \
-              -h https://testrail101.testrail.io/ \
-              --project "TestRail CLI code-first" \
-              -u $USER \
-              -p $PASS \
-              parse_junit \
-              --title "Automated Tests from GitHub workflow" \
-              -f "./target/TEST-junit-jupiter.xml"
+          name: Upload the test results to Testrail
+          command: |
+            trcli -y \
+             -h https://testrail101.testrail.io/ \
+             --project "TestRail CLI code-first" \
+             -u $USER \
+             -p $PASS \
+             parse_junit \
+             --title "Automated Tests from GitHub workflow" \
+             -f "./target/TEST-junit-jupiter.xml"
+
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
