@@ -50,7 +50,7 @@ jobs:
              -u $USER \
              -p $PASS \
              parse_junit \
-             --title "Automated Tests from GitHub workflow" \
+             --title "Automated Tests from CircleCI workflow" \
              -f "./target/TEST-junit-jupiter.xml"
 
 # Invoke jobs via workflows
