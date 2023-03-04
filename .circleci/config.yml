@@ -45,7 +45,7 @@ jobs:
           name: Upload the test results to Testrail
           command: |
             trcli -y \
-             -h https://testrail101.testrail.io/ \
+             -h https://$TESTRAIL_INSTANCE.testrail.io/ \
              --project "TestRail CLI code-first" \
              -u $USER \
              -p $PASS \
