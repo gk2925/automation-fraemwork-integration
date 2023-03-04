@@ -46,7 +46,7 @@ jobs:
           command: |
             trcli -y \
              -h https://$TESTRAIL_INSTANCE.testrail.io/ \
-             --project "TestRail CLI code-first" \
+             --project "PROJECT_NAME" \
              -u $USER \
              -p $PASS \
              parse_junit \
